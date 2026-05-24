@@ -312,7 +312,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 print("\n" + "=" * 80)
-print("📊 Propensity Score Overlap")
+print("Propensity Score Overlap")
 print("=" * 80)
 
 # =========================================================
@@ -417,7 +417,7 @@ plt.savefig(
 
 plt.close()
 
-print("\n✅ Figure 4C exported")
+print("\nFigure 4C exported")
 print("  - Figure_4C_PS_Overlap_BRCA.png")
 
 
@@ -428,7 +428,7 @@ print("  - Figure_4C_PS_Overlap_BRCA.png")
 # ───────────────────────────────────────
 
 print("\n" + "=" * 80)
-print("📊 Covariate Balance Diagnostics")
+print("Covariate Balance Diagnostics")
 print("=" * 80)
 
 # =========================================================
@@ -556,7 +556,7 @@ categorical_display_vars = [
 
 for var in categorical_display_vars:
 
-    temp_var = df_balance[var].fillna(-999).astype(int)  # 或 .astype(str)
+    temp_var = df_balance[var].fillna(-999).astype(int)
     dummies = pd.get_dummies(temp_var, prefix=var)
 
     for dummy_col in dummies.columns:
@@ -736,7 +736,7 @@ plt.savefig(
 
 plt.close()
 
-print("\n✅ Figure 4D exported")
+print("\n Figure 4D exported")
 print("  - Figure_4D_Love_Plot_BRCA.png")
 
 
@@ -815,7 +815,7 @@ km_df = km_df[
 # BRCA encoding check
 # =========================================================
 
-print("\n📊 BRCA encoding distribution:")
+print("\n BRCA encoding distribution:")
 print(
     km_df['brca_mutation']
     .value_counts()
@@ -945,7 +945,7 @@ plt.savefig(
 
 plt.close()
 
-print("\n✅ Kaplan–Meier figure exported")
+print("\n Kaplan–Meier figure exported")
 print("  - Figure_4A_KM_BRCA_PFS.png")
 
 

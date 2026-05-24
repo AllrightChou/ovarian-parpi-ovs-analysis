@@ -102,7 +102,7 @@ required_cols = [
 for col in required_cols:
 
     if col not in df.columns:
-        raise ValueError(f"❌ Missing required column: {col}")
+        raise ValueError(f" Missing required column: {col}")
 
 # only binary treatment
 df = df[

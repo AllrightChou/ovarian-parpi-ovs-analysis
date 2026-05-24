@@ -217,7 +217,7 @@ df = df[df["organ_vulnerability_score"].notna()].copy()
 df["organ_vulnerability_score"] = (
     pd.to_numeric(df["organ_vulnerability_score"], errors="coerce")
     .round()
-    .astype("Int64")  # 使用可空整数类型，保留NaN
+    .astype("Int64") 
 )
 
 ovs_to_group = {
@@ -234,7 +234,7 @@ df["vuln_group"] = df["high_vulnerability"].map({0: "Low", 1: "High"})
 
 # Display OVS distribution for reproducibility checks
 # and subgroup transparency.
-print("\n📊 OVS 分布")
+print("\n OVS ")
 ovs_counts = df["organ_vulnerability_score"].value_counts().sort_index()
 for score in ovs_counts.index:
     n = ovs_counts.loc[score]

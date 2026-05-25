@@ -202,8 +202,8 @@ X_raw = analysis_df.drop(
 # Iterative imputation
 imputer = IterativeImputer(
     max_iter=50,
-    random_state=42,
-    initial_strategy="median"
+    random_state=42+i,
+    sample_posterior=True
 )
 
 X_imputed = imputer.fit_transform(X_raw)

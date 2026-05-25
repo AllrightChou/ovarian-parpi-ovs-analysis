@@ -5,11 +5,14 @@
 # =========================================================
 #
 # PURPOSE:
-#   Estimate individualized conditional average treatment
-#   effects (CATEs) of olaparib versus niraparib on PFS
-#   using a Generalized Random Forest (GRF) framework,
-#   consistent with the causal inference estimand.
-#
+#   Estimate individualized treatment response differences
+#   between olaparib and niraparib on PFS duration
+#   using a Generalized Random Forest (GRF) framework.
+#   Note: Because the outcome is specified as observed PFS
+#   duration (months) without censoring adjustment, results
+#   should be interpreted as exploratory assessments of
+#   differential treatment response rather than confirmatory
+#   causal survival effect estimates.
 # KEY DESIGN DECISIONS:
 #   - Treatment encoding: 0 = Olaparib, 1 = Niraparib
 #   - Negative CATE values indicate relatively more
@@ -202,7 +205,7 @@ X_raw = analysis_df.drop(
 # Iterative imputation
 imputer = IterativeImputer(
     max_iter=50,
-    random_state=42+i,
+    random_state=42,
     sample_posterior=True
 )
 
@@ -330,17 +333,8 @@ n_total = len(cate)
 
 n_nira = np.sum(cate > 0)
 
-print(
-    f"\nPrefer Niraparib: "
-    f"{n_nira} "
-    f"({n_nira / n_total * 100:.1f}%)"
-)
-
-print(
-    f"Prefer Olaparib: "
-    f"{n_total - n_nira} "
-    f"({(n_total - n_nira) / n_total * 100:.1f}%)"
-)
+print(f"\nEstimated higher PFS under Niraparib (diff > 0): {n_nira} ({n_nira / n_total * 100:.1f}%)")
+print(f"Estimated higher PFS under Olaparib (diff < 0): {n_total - n_nira} ({(n_total - n_nira) / n_total * 100:.1f}%)")
 
 # =========================================================
 # 17. Vulnerability Stratification
@@ -366,13 +360,7 @@ for group_name, group_val in [
 
     n_pref = np.sum(cate_group > 0)
 
-    print(
-        f"{group_name} vulnerability "
-        f"(n={n_group}): "
-        f"{n_pref} "
-        f"({n_pref / n_group * 100:.1f}%) "
-        f"prefer Niraparib"
-    )
+    print(f"{group_name} vulnerability (n={n_group}): {n_pref} ({n_pref / n_group * 100:.1f}%) estimated higher PFS under Niraparib")
 
 # =========================================================
 # 18. Permutation Importance
@@ -414,7 +402,7 @@ sns.histplot(cate, bins=30, kde=True, color='skyblue', alpha=0.7, edgecolor='bla
 plt.axvline(0, color='red', linestyle='--', label='No effect')
 plt.xlabel("Estimated PFS Difference (Niraparib − Olaparib, months)")
 plt.ylabel("Count")
-plt.title("Distribution of Individual Treatment Effects", fontsize=12)
+plt.title("Distribution of Estimated Treatment Response Differences", fontsize=12)
 ax = plt.gca()
 ax.spines['top'].set_color('black')
 ax.spines['bottom'].set_color('black')

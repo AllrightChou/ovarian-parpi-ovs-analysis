@@ -118,7 +118,7 @@ Suggested order:
 ```
 
 ## Citation  
-A formal citation will be provided upon publication. In the interim, please contact the corresponding author if you wish to reference this work.  
+Zhou X, Xiong X, Yang Z, Cao Z and Ni Q (2026) Progression-free survival outcomes of PARP inhibitors in ovarian cancer: an exploratory analysis of treatment heterogeneity based on organ vulnerability. Front. Oncol. 16:1768842. doi: 10.3389/fonc.2026.1768842
 
 ## License  
 This project is licensed under the MIT License for academic and non-commercial research use. See LICENSE file for details.  
